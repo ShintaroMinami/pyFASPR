@@ -1,0 +1,3 @@
+[submodule "pyfaspr/FASPR"]
+	path = pyfaspr/FASPR
+	url = https://github.com/tommyhuangthu/FASPR.git
