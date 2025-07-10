@@ -11,6 +11,7 @@ with open("README.md", "r") as fh:
 class compile_FASPR(build_ext):
     def build_extension(self, ext):
         # make
+        subprocess.run('git submodule update --init --recursive', shell=True)
         dir_path = os.path.dirname(os.path.abspath(__file__))
         subprocess.run(
             f'g++ -w -O3 -o {dir_path}/pyfaspr/FASPR/FASPR {dir_path}/pyfaspr/FASPR/src/*.cpp',
