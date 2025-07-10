@@ -1,5 +1,5 @@
 # FASPR binary
-pyfaspr/FASPR
+pyfaspr/FASPR/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
