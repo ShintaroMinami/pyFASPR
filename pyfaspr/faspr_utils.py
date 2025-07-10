@@ -31,13 +31,12 @@ def run_FASPR(
         command = f"{FASPR_BINARY} -i {input_pdb} -o {output_pdb}"
         if sequence:
             command += f" -s {sequence}"
-        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = process.communicate()
+        result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if verbose:
             print(f"Running command: {command}")
-            if stdout:
-                print(f"STDOUT: {stdout.decode()}")
-            if stderr:
-                print(f"STDERR: {stderr.decode()}")
+            if result.stdout:
+                print(f"{result.stdout.decode()}")
+            if result.stderr:
+                print(f"{result.stderr.decode()}", file=sys.stderr)
         pdb_text_out = open(output_pdb, 'r').read()
     return pdb_text_out
