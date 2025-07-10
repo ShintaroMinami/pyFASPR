@@ -38,6 +38,7 @@ setuptools.setup(
         'memory_tempfile',
     ],
     scripts=[
+        'scripts/pyfaspr'
     ],
 
 )

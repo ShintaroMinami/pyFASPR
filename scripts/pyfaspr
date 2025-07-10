@@ -1,0 +1,28 @@
+#! /usr/bin/env python
+
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+parser = ArgumentParser(description="Run FASPR to build sidechains for a PDB file.",
+                        formatter_class=ArgumentDefaultsHelpFormatter)
+parser.add_argument('pdb', type=str, help='Input PDB file path')
+parser.add_argument('--sequence', '-s', type=str, default=None, help='Amino acid sequence to be overridden (optional)')
+parser.add_argument('--output_pdb', '-o', type=str, default=None, help='Output PDB file path (optional)')
+parser.add_argument('--verbose', '-v', action='store_true', help='Enable verbose output')
+args = parser.parse_args()
+
+# Add the parent directory to the system path if not it is already there
+import sys
+if not 'pyfaspr' in sys.modules:
+    from pathlib import Path
+    dir_path = Path(__file__).resolve().parent.parent
+    sys.path.append(f"{dir_path}")
+
+# Import the run_FASPR function from the pyfaspr module
+from pyfaspr import run_FASPR
+
+# Run FASPR with the provided arguments
+pdb_out = run_FASPR(pdb=args.pdb, sequence=args.sequence, verbose=args.verbose)
+
+# Write the output PDB to the specified file or stdout
+fh = open(args.output_pdb, 'w') if args.output_pdb else sys.stdout
+fh.write(pdb_out)
+fh.close()
