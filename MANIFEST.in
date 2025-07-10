@@ -1,1 +1,2 @@
 graft pyfaspr/FASPR
+include pyfaspr/bin/*

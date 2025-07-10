@@ -3,7 +3,7 @@ import os
 import subprocess
 from tempfile import TemporaryDirectory
 dir_path = os.path.dirname(os.path.abspath(__file__))
-FASPR_BINARY = f"{dir_path}/FASPR/FASPR"
+FASPR_BINARY = f"{dir_path}/bin/FASPR"
 
 def run_FASPR(
         pdb: str,

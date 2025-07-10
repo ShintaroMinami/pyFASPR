@@ -1,4 +1,3 @@
-import os
 import subprocess
 import setuptools
 from setuptools.extension import Extension
@@ -10,11 +9,9 @@ with open("README.md", "r") as fh:
 
 class compile_FASPR(build_ext):
     def build_extension(self, ext):
-        # make
         subprocess.run('git submodule update --init --recursive', shell=True)
-        dir_path = os.path.dirname(os.path.abspath(__file__))
         subprocess.run(
-            f'g++ -w -O3 -o {dir_path}/pyfaspr/FASPR/FASPR {dir_path}/pyfaspr/FASPR/src/*.cpp',
+            f'g++ -w -O3 -o {self.build_lib}/pyfaspr/bin/FASPR {self.build_lib}/pyfaspr/FASPR/src/*.cpp',
             shell=True
             )
 
