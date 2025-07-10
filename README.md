@@ -3,10 +3,6 @@ A python wrapper of FASPR, a fast and accurate protein sidechain builder
 
 ## Install
 ``` bash
-# via pypi
-pip install pyfaspr
-
-# via github
 pip install git+https://github.com/ShintaroMinami/pyFASPR.git
 ```
 
