@@ -1,6 +1,9 @@
 import sys
 import os
 import subprocess
+import numpy as np
+import pdbutil
+from copy import deepcopy
 from tempfile import TemporaryDirectory
 dir_path = os.path.dirname(os.path.abspath(__file__))
 FASPR_BINARY = f"{dir_path}/bin/FASPR"
@@ -22,7 +25,12 @@ def run_FASPR(
         pdb_text = open(pdb, 'r').read()
     else:
         pdb_text = pdb
-
+    # store the original PDB data for later use
+    data_org = pdbutil.read_pdb(pdb_text)
+    data = deepcopy(data_org)
+    data['resnum'] = np.arange(1, len(data['resnum']) + 1)
+    pdb_text = pdbutil.write_pdb(**data)
+    # FASPR run
     with TemporaryDirectory() as temp_dir:
         input_pdb = os.path.join(temp_dir, "input.pdb")
         output_pdb = os.path.join(temp_dir, "output.pdb")
@@ -40,4 +48,9 @@ def run_FASPR(
             if result.stderr:
                 print(f"{result.stderr.decode()}", file=sys.stderr)
         pdb_text_out = open(output_pdb, 'r').read()
+    data_out = pdbutil.read_pdb(pdb_text_out)
+    data_out['resnum'] = data_org['resnum']
+    data_out['bfactor'] = data_org['bfactor']
+    data_out['occupancy'] = data_org['occupancy']
+    pdb_text_out = pdbutil.write_pdb(**data_out)
     return pdb_text_out
