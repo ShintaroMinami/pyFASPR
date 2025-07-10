@@ -9,7 +9,6 @@ with open("README.md", "r") as fh:
 
 class compile_FASPR(build_ext):
     def build_extension(self, ext):
-        #subprocess.run('git submodule update --init --recursive', shell=True)
         subprocess.run(
             f'g++ -w -O3 -o {self.build_lib}/pyfaspr/bin/FASPR {self.build_lib}/pyfaspr/FASPR/src/*.cpp',
             shell=True
