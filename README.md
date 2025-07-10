@@ -61,3 +61,23 @@ options:
                         Output PDB file path (optional) (default: None)
   --verbose, -v         Enable verbose output (default: False)
 ```
+
+
+## Original GitHub reopository
+This code includes [tommyhuangthu](https://github.com/tommyhuangthu)'s excellent open source software, FASPR. The original repository is available on MIT license here, https://github.com/tommyhuangthu/FASPR.git.
+
+The author of this repo appreciate to the FASPR team for making such great methods and software available!
+
+## Citations
+``` bibtex
+@article{huang2020faspr,
+  title={FASPR: an open-source tool for fast and accurate protein side-chain packing},
+  author={Huang, Xiaoqiang and Pearce, Robin and Zhang, Yang},
+  journal={Bioinformatics},
+  volume={36},
+  number={12},
+  pages={3758--3765},
+  year={2020},
+  publisher={Oxford University Press}
+}
+```
