@@ -39,7 +39,11 @@ def run_FASPR(
             f.write(pdb_text)
         command = f"{FASPR_BINARY} -i {input_pdb} -o {output_pdb}"
         if sequence:
-            command += f" -s {sequence}"
+            # Write the sequence content to a file
+            sequence_file = os.path.join(temp_dir, "sequence.txt")
+            with open(sequence_file, 'w') as f:
+                f.write(sequence)
+            command += f" -s {sequence_file} "
         result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if verbose:
             print(f"Running command: {command}")
